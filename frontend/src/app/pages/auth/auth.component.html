@@ -1,0 +1,13 @@
+<div fxLayout="column" class="zero fullScreen" fxLayoutAlign="center center">
+  <div fxFlex="33" class="one">
+    <mat-card class="auth-card" *ngIf="!authService.isLoggedIn">
+      <app-signup *ngIf="!useLoginComponent"></app-signup>
+      <app-signin *ngIf="useLoginComponent"></app-signin>
+      <mat-card-footer>
+        {{useLoginComponent ? 'Don\'t have' : "Already have"}} an account?
+        <button mat-button (click)="switchComponent()"> Click here</button>
+      </mat-card-footer>
+    </mat-card>
+    <h3 *ngIf="authService.isLoggedIn">You are already logged in</h3>
+  </div>
+</div>

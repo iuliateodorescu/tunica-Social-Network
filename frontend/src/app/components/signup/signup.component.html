@@ -1,0 +1,21 @@
+<mat-card-title>Sign up</mat-card-title>
+<mat-card-content>
+  <form class="example-form" fxLayout="column">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput  [(ngModel)]="credentials.email" name="email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput type="password" placeholder="Repeat the password" [(ngModel)]="credentials.password2" name="password2">
+    </mat-form-field>
+
+  </form>
+  <button mat-raised-button (click)="onSubmit()" color="primary">
+    Register
+  </button>
+
+</mat-card-content>

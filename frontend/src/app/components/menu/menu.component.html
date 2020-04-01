@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="navbar">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="left">
+      <button mat-button routerLink="/">Home</button>
+    </div>
+    <div class="right">
+      <div id="loggedIn" *ngIf="authService.isLoggedIn">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <i class="material-icons" fxFlexAlign="end">account_circle</i>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <button mat-button class="submenu" routerLink="/profile">Profile</button>
+            <button mat-button class="submenu" routerLink="/auth" (click)="authService.signOut()">Sign out
+            </button>
+          </div>
+        </mat-menu>
+      </div>
+      <button mat-button routerLink="/auth" *ngIf="!authService.isLoggedIn">Authenticate</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
