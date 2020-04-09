@@ -1,0 +1,21 @@
+<mat-card-title>Update Profile</mat-card-title>
+<mat-card-content>
+  <form class="example-form" fxLayout="column">
+    <mat-form-field class="example-full-width">
+      <mat-label>Username</mat-label>
+      <input matInput  [(ngModel)]="user_info.username" name="username">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" placeholder="University" [(ngModel)]="user_info.university" name="university">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput type="text" placeholder="Interests" [(ngModel)]="user_info.interests" name="interests">
+    </mat-form-field>
+
+  </form>
+  <button mat-raised-button (click)="onSubmit()" color="primary">
+    Save
+  </button>
+
+</mat-card-content>

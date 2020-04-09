@@ -23,6 +23,8 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import {FormsModule} from '@angular/forms';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import {FormsModule} from '@angular/forms';
     MenuComponent,
     AuthComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    UserProfileComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
