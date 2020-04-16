@@ -1,0 +1,6 @@
+<button mat-flat-button (click)="showCreateModal()">Create group</button>
+<div *ngIf="groups">
+  <div *ngFor="let group of groups | async">
+    <app-group [group]="group"></app-group>
+  </div>
+</div>

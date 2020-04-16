@@ -1,7 +1,10 @@
 <mat-toolbar color="primary" class="navbar">
   <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="left">
+    <div class="left" fxLayout="row">
       <button mat-button routerLink="/">Home</button>
+      <div *ngIf="authService.isLoggedIn">
+        <button mat-button routerLink="groups">Groups</button>
+      </div>
     </div>
     <div class="right">
       <div id="loggedIn" *ngIf="authService.isLoggedIn">

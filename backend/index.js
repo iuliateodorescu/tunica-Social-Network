@@ -5,6 +5,7 @@ const app = express()
 const userRoute = require('./routes/user')
 const cors = require('cors')
 const testRoute = require('./routes/test')
+const groupsRoute = require('./routes/groups')
 app.use(cors())
 app.use(express.json())
 if (!config.get('privateKey')) {
@@ -18,11 +19,11 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Could not connect to mongo'))
-
+  .catch((err) => {
+    console.error('Could not connect to mongo')
+  })
 
 app.use('/api/user', userRoute)
-app.use('/api/test',testRoute)
-
+app.use('/api/groups',groupsRoute)
 
 app.listen(3000, () => console.log(`Listening on port 3000`))
