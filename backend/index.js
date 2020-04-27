@@ -2,10 +2,8 @@ const config = require('config')
 const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
-const userRoute = require('./routes/user')
 const cors = require('cors')
-const testRoute = require('./routes/test')
-const groupsRoute = require('./routes/groups')
+const routes = require ('./routes/routes.js')
 app.use(cors())
 app.use(express.json())
 if (!config.get('privateKey')) {
@@ -13,17 +11,17 @@ if (!config.get('privateKey')) {
   process.exit(1)
 }
 
+console.log('Connecting to mongo...')
+
 mongoose
   .connect('mongodb://localhost/studnet', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => {
-    console.error('Could not connect to mongo')
+  .then(() => {
+    console.log('Connected to MongoDB')
+
+    app.use('/api/',routes)
+
+    app.listen(3000, () => console.log(`Listening on port 3000`))
   })
-
-app.use('/api/user', userRoute)
-app.use('/api/groups',groupsRoute)
-
-app.listen(3000, () => console.log(`Listening on port 3000`))
