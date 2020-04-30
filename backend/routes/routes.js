@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 const userRoute = require('./user')
 const groupsRoute = require('./groups')
-const studiesRoute = require('./studies')
+const university = require('../middleware/university')
 
 router.use('/user', userRoute)
 router.use('/groups', groupsRoute)
-router.use('/studies', studiesRoute)
+router.use('/university', university)
+
 
 module.exports=router

@@ -22,6 +22,9 @@ mongoose
     console.log('Connected to MongoDB')
 
     app.use('/api/',routes)
+    app.use('*',(req,res) => {
+      res.status(404).send("Route not found, try using /api")
+  })
 
     app.listen(3000, () => console.log(`Listening on port 3000`))
   })

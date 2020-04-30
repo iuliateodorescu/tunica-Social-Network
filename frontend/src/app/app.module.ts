@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HomeComponent} from './pages/home/home.component';
 import {
   MatButtonModule,
-  MatCardModule, MatDialogModule,
+  MatCardModule, MatDialogModule, MatDividerModule,
   MatFormFieldModule,
   MatInputModule,
   MatMenuModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule,
@@ -54,7 +54,8 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
     FormsModule,
     MatInputModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule
   ],
   entryComponents: [
     CreateGroupComponent

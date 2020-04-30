@@ -1,6 +1,27 @@
-<button mat-flat-button (click)="showCreateModal()">Create group</button>
-<div *ngIf="groups">
-  <div *ngFor="let group of groups | async">
-    <app-group [group]="group"></app-group>
+<div fxLayout="row" class="container">
+  <div fxFlex="25%" class="centered">
+    <h1>Filters</h1>
+    <div class="filters" fxLayout="column">
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <mat-select [(ngModel)]="filters.location" name="location" (ngModelChange)="onLocationChange($event)">
+          <mat-option *ngFor="let location of locations" [value]="location">{{location}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>University</mat-label>
+        <mat-select [(ngModel)]="filters.university" name="university" (ngModelChange)="onUniChange($event)">
+          <mat-option *ngFor="let university of universities" [value]="university">{{university.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button (click)="showCreateModal()">Create group</button>
+  </div>
+
+  <div class="divider"></div>
+  <div *ngIf="groups" fxFlex="75%" fxLayout="row wrap" fxLayoutGap="40px grid" fxLayoutAlign="space-around">
+    <div *ngFor="let group of groups ">
+      <app-group [group]="group"></app-group>
+    </div>
   </div>
 </div>

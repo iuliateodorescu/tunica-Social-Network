@@ -22,11 +22,6 @@ const GroupSchema = new Schema({
     type: String,
     required: true,
   },
-  topic: {
-    type: String,
-    required: true,
-    maxlength: 255,
-  },
   members: {
     type: [Schema.Types.ObjectId],
     ref: 'User',
