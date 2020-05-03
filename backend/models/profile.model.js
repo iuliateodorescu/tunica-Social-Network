@@ -1,6 +1,3 @@
-const config = require('config')
-const jwt = require('jsonwebtoken')
-const Joi = require('joi')
 const mongoose = require('mongoose')
 
 const ProfileSchema = new mongoose.Schema({
@@ -18,6 +15,11 @@ const ProfileSchema = new mongoose.Schema({
         maxlength: 50,
         unique: true,
     },
+    photo: {
+        type: String,
+    },
 })
 
 const Profile = mongoose.model('Profile', ProfileSchema)
+exports.Profile = Profile
+exports.ProfileSchema = ProfileSchema

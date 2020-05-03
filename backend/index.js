@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
 const userRoute = require('./routes/user')
+const profileRoute = require('./routes/profile')
 const cors = require('cors')
 const testRoute = require('./routes/test')
 app.use(cors())
@@ -23,6 +24,7 @@ mongoose
 
 app.use('/api/user', userRoute)
 app.use('/api/test',testRoute)
+app.use('/api/profile', profileRoute)
 
 
 app.listen(3000, () => console.log(`Listening on port 3000`))
