@@ -1,4 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
+import {GroupsService} from '../../services/groups.service';
+import {AuthService} from '../../services/auth.service';
+import {GeneralService} from '../../services/general.service';
 
 @Component({
   selector: 'app-group',
@@ -8,9 +11,25 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 export class GroupComponent implements OnInit {
   @Input() group;
 
+  public disabled = false;
 
-  constructor() { }
+  constructor(private groupsService: GroupsService,
+              private auth: AuthService,
+              private gs: GeneralService) {
+    this.auth.getCurrentUser().then((user: any) => this.disabled = user.groups.find(g => g === this.group._id));
+  }
+
   ngOnInit() {
   }
 
+  async joinGroup() {
+    try {
+      await this.groupsService.addUserToGroup(this.group._id);
+      this.disabled = true;
+      this.gs.openSnackBar('Success!');
+    } catch (e) {
+      this.gs.openSnackBar('An error has occured!');
+      console.error(e);
+    }
+  }
 }

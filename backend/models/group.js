@@ -25,6 +25,7 @@ const GroupSchema = new Schema({
   members: {
     type: [Schema.Types.ObjectId],
     ref: 'User',
+    unique: true
   },
   title: {
     type: String,

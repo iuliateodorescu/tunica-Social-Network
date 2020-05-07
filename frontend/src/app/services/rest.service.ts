@@ -13,7 +13,6 @@ export class RestService {
   }
 
   public addOne(route: string, object: any) {
-    console.log('rest', object);
     this.http.post(`/api/${route}`, object, this.generalService.getHttpOptions())
       .subscribe(res => this.generalService.openSnackBar('Success!'), err =>
         this.generalService.resolveError(err));

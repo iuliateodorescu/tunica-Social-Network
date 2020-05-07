@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userRoute = require('./user')
-const groupsRoute = require('./groups')
+const groupsRoute = require('../middleware/groups')
 const university = require('../middleware/university')
 
 router.use('/user', userRoute)

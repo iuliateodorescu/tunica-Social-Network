@@ -2,6 +2,7 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const mongoose = require('mongoose')
+const { Group } = require('./group')
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -18,9 +19,14 @@ const UserSchema = new mongoose.Schema({
     maxlength: 255,
     unique: true,
   },
+  groups: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: Group,
+    unique: true
+  },
 })
 
-UserSchema.methods.generateAuthToken = function() {
+UserSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
       _id: this._id,
@@ -31,18 +37,10 @@ UserSchema.methods.generateAuthToken = function() {
   return token
 }
 
-
 function validateUser(user) {
   const schema = {
-    email: Joi.string()
-      .min(5)
-      .max(255)
-      .required()
-      .email(),
-    password: Joi.string()
-      .min(3)
-      .max(10)
-      .required(),
+    email: Joi.string().min(5).max(255).required().email(),
+    password: Joi.string().min(3).max(10).required(),
   }
 
   return Joi.validate(user, schema)
