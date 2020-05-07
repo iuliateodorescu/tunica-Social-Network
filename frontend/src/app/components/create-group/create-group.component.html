@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Create a group</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Group's name</mat-label>
+      <input name="name" matInput placeholder="Name" [(ngModel)]="group.name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Group's description</mat-label>
+      <input name="description" matInput placeholder="Description" [(ngModel)]="group.description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <mat-select [(ngModel)]="group.location" name="location" (ngModelChange)="onLocationChange($event)">
+        <mat-option *ngFor="let location of locations" [value]="location">{{location}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>University</mat-label>
+      <mat-select [(ngModel)]="group.university" name="university" (ngModelChange)="onUniChange($event)">
+        <mat-option *ngFor="let university of universities" [value]="university">{{university.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="submit()">Submit</button>
+</div>

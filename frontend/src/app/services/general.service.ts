@@ -34,7 +34,7 @@ export class GeneralService {
     return error;
   }
 
-  public openSnackBar(message: string, duration: number) {
+  public openSnackBar(message: string, duration: number = 1) {
     this.snackBar.open(message, '', {duration: duration * 1000});
   }
 

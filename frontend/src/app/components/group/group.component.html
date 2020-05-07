@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-title>{{group.name}}</mat-card-title>
+  <mat-card-content>
+    <img src="../../../assets/images/all-group-placeholder.jpg" alt="group-img" class="image">
+    <mat-card-subtitle>
+      {{group.description}}
+    </mat-card-subtitle>
+  </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="joinGroup()" [disabled]="disabled">Join</button>
+    </mat-card-actions>
+</mat-card>
