@@ -1,1 +1,21 @@
-<p>create-post works!</p>
+<div fxLayout="column" class="create">
+  <div>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Text</mat-label>
+        <textarea class="textarea" cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize" name="text" matInput placeholder="text"
+                  cdkAutosizeMinRows="3"
+                  cdkAutosizeMaxRows="5"
+                  cols="100"
+                  [(ngModel)]="post.text"></textarea>
+      </mat-form-field>
+
+      <div mat-card-avatar class="pointer" (click)="file.click()">
+        <input type="file" (change)="onFileChange($event)" accept="image/*" #file hidden>
+        <button mat-raised-button>Image</button>
+      </div>
+    </form>
+  </div>
+  <button mat-button (click)="submit()" class="but">Submit</button>
+</div>

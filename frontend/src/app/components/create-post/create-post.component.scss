@@ -1,0 +1,16 @@
+.create{
+  background: rgba(175, 175, 170, 0.3);
+  width:400px;
+}
+
+.but {
+  width: 100%;
+}
+
+.textarea {
+  width: 100% !important;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: auto !important;
+}
