@@ -14,12 +14,16 @@ const CommentSchema = new Schema({
   },
 })
 const Comment = mongoose.model('Comment',CommentSchema)
-const GroupSchema = new Schema({
+const PostSchema = new Schema({
+  author: {
+    type: [Schema.Types.ObjectId],
+    ref: User,
+    required: true,
+  },
   text: {
     type: String,
     required: true,
     maxlength: 255,
-    unique: true,
   },
   image: {
     type: String,
@@ -28,15 +32,15 @@ const GroupSchema = new Schema({
   likes: {
     type: [Schema.Types.ObjectId],
     ref: User,
-    unique: true,
+    default: []
   },
   comments: {
     type: [Schema.Types.ObjectId],
     ref: Comment,
-    unique: true,
+    default: []
   },
 })
 
-const Group = mongoose.model('Group', GroupSchema)
+const Post = mongoose.model('Post', PostSchema)
 
-exports.Group = Group
+exports.Post = Post

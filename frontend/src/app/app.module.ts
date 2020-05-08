@@ -28,6 +28,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { FeedComponent } from './pages/feed/feed.component';
+import { PostComponent } from './components/post/post.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { FeedComponent } from './pages/feed/feed.component';
     CreatePostComponent,
     UserProfileComponent,
     ProfileComponent,
-    FeedComponent
+    FeedComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

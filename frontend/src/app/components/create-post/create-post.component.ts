@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PostsService} from '../../services/posts.service';
+import {GeneralService} from '../../services/general.service';
+import {RestService} from '../../services/rest.service';
 
 @Component({
   selector: 'app-create-post',
@@ -7,10 +9,16 @@ import {PostsService} from '../../services/posts.service';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
+  @Input() type;
+  public post = {
+    image: '',
+    text: '',
+    type: this.type
+  };
 
-  public post = {};
-
-  constructor(private ps: PostsService) {
+  constructor(private ps: PostsService,
+              private gs: GeneralService,
+              private rest: RestService) {
   }
 
   ngOnInit() {
@@ -19,8 +27,20 @@ export class CreatePostComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files && event.target.files.length > 0) {
       const file: File = event.target.files[0];
-      this.ps.uploadPhoto(file);
+      this.gs.uploadImage(file).subscribe((res: any) => {
+        this.post.image = res.filename;
+        console.log(res.filename);
+      }, err => {
+        this.gs.resolveError(err);
+      });
     }
+  }
+
+  submit() {
+    if (!this.post.image && !this.post.text) {
+      this.gs.openSnackBar('Can\'t create an empty post');
+    }
+    this.rest.addOne('post/', this.post);
   }
 
 

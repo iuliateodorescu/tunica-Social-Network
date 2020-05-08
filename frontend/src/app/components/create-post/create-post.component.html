@@ -2,9 +2,9 @@
   <div>
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <mat-label>Text</mat-label>
+        <mat-label>What's on your mind?</mat-label>
         <textarea class="textarea" cdkTextareaAutosize
-                  #autosize="cdkTextareaAutosize" name="text" matInput placeholder="text"
+                  #autosize="cdkTextareaAutosize" name="text" matInput placeholder="Share with everyone!"
                   cdkAutosizeMinRows="3"
                   cdkAutosizeMaxRows="5"
                   cols="100"
@@ -17,5 +17,5 @@
       </div>
     </form>
   </div>
-  <button mat-button (click)="submit()" class="but">Submit</button>
+  <button mat-raised-button (click)="submit()" class="but" color="primary">Submit</button>
 </div>

@@ -51,4 +51,10 @@ export class GeneralService {
       });
   }
 
+  public uploadImage(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post('api/general/image', formData, this.getHttpOptions());
+  }
+
 }

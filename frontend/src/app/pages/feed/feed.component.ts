@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RestService} from '../../services/rest.service';
 
 @Component({
   selector: 'app-feed',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-  constructor() { }
+  public posts = [];
+
+  constructor(private rest: RestService) {
+    this.rest.getAll('/post/getOwn').subscribe(posts => this.posts = posts);
+  }
 
   ngOnInit() {
   }
