@@ -4,22 +4,32 @@ const general = require('./general')
 const auth = require('./auth')
 const { Post, Comment } = require('../models/post')
 const { User } = require('../models/user.model')
+const { Group } = require('../models/group')
 
 const addPost = async (req, res, next) => {
   try {
     const user = general.decoded(req.headers)
     const post = req.body
-    if (post.type === 'group') {
-      //notifyGroup
-    } else if (post.type === 'personal') {
-      //notifyFriends
-    }
     post.author = user._id
     const savedPost = new Post(post)
     await savedPost.save()
     const userModel = await User.findById(user._id)
     userModel.posts.push(savedPost)
     await userModel.save()
+    if (post.type.text === 'group') {
+      console.group(post.type.groupId)
+      const { groupId } = post.type
+      const group = await Group.findById(groupId)
+      group.posts.push(savedPost)
+      group.save()
+      group.members.forEach(async (memberId) => {
+        const member = await User.findById(memberId)
+        member.posts.push(savedPost)
+        member.save()
+      })
+    } else if (post.type.text === 'personal') {
+      //notifyFriends
+    }
     res.status(201).send({})
   } catch (err) {
     console.error(err)

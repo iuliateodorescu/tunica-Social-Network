@@ -31,6 +31,7 @@ import { FeedComponent } from './pages/feed/feed.component';
 import { PostComponent } from './components/post/post.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { GroupPageComponent } from './pages/group-page/group-page.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { CommentComponent } from './components/comment/comment.component';
     FeedComponent,
     PostComponent,
     CommentsComponent,
-    CommentComponent
+    CommentComponent,
+    GroupPageComponent
   ],
   imports: [
     BrowserModule,

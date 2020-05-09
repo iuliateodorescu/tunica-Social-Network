@@ -5,6 +5,7 @@ import {AuthComponent} from './pages/auth/auth.component';
 import {HomeComponent} from './pages/home/home.component';
 import {GroupsPageComponent} from './pages/groups-page/groups-page.component';
 import {FeedComponent} from './pages/feed/feed.component';
+import {GroupPageComponent} from './pages/group-page/group-page.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'auth', component: AuthComponent},
   {path: 'groups', component: GroupsPageComponent},
+  {path: 'group/:id', component: GroupPageComponent},
   {path: '', component: HomeComponent},
 ];
 

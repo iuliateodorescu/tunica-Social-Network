@@ -22,6 +22,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.post.type = this.type;
   }
 
   onFileChange(event) {
@@ -39,8 +40,10 @@ export class CreatePostComponent implements OnInit {
   submit() {
     if (!this.post.image && !this.post.text) {
       this.gs.openSnackBar('Can\'t create an empty post');
+    } else {
+      this.rest.addOne('post/', this.post);
+      console.log(this.type);
     }
-    this.rest.addOne('post/', this.post);
   }
 
 
