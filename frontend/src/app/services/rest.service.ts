@@ -21,4 +21,11 @@ export class RestService {
   public getAll(route: string): Observable<any> {
     return this.http.get(`/api/${route}`, this.generalService.getHttpOptions());
   }
+
+  public post(route: string, object: any) {
+    this.http.post(`/api/${route}`, object, this.generalService.getHttpOptions())
+      .subscribe(res => this.generalService.openSnackBar('Success!'), err =>
+        this.generalService.resolveError(err));
+  }
 }
+

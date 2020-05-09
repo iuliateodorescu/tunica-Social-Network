@@ -29,10 +29,14 @@ export class GeneralService {
   }
 
   public formatError(error: string) {
-    error = error.replace('"', '');
-    error = error.replace('"', '');
-    error = error.charAt(0).toUpperCase() + error.substring(1) + '.';
-    return error;
+    if (error) {
+      error = error.replace('"', '');
+      error = error.replace('"', '');
+      error = error.charAt(0).toUpperCase() + error.substring(1) + '.';
+      return error;
+    } else {
+      console.error(error);
+    }
   }
 
   public openSnackBar(message: string, duration: number = 1) {
@@ -55,6 +59,11 @@ export class GeneralService {
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post('api/general/image', formData, this.getHttpOptions());
+  }
+
+  public formImageLink(fileName) {
+    const url = 'http://localhost:3000/api/general/image/' + fileName;
+    return url;
   }
 
 }

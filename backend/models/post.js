@@ -16,7 +16,7 @@ const CommentSchema = new Schema({
 const Comment = mongoose.model('Comment',CommentSchema)
 const PostSchema = new Schema({
   author: {
-    type: [Schema.Types.ObjectId],
+    type: Schema.Types.ObjectId,
     ref: User,
     required: true,
   },

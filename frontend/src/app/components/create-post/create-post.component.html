@@ -5,7 +5,7 @@
         <mat-label>What's on your mind?</mat-label>
         <textarea class="textarea" cdkTextareaAutosize
                   #autosize="cdkTextareaAutosize" name="text" matInput placeholder="Share with everyone!"
-                  cdkAutosizeMinRows="3"
+                  cdkAutosizeMinRows="2"
                   cdkAutosizeMaxRows="5"
                   cols="100"
                   [(ngModel)]="post.text"></textarea>
@@ -13,7 +13,7 @@
 
       <div mat-card-avatar class="pointer" (click)="file.click()">
         <input type="file" (change)="onFileChange($event)" accept="image/*" #file hidden>
-        <button mat-raised-button>Image</button>
+        <i class="material-icons" fxFlexAlign="end">add_photo_alternate</i>
       </div>
     </form>
   </div>

@@ -28,13 +28,45 @@ const addPost = async (req, res, next) => {
 }
 
 const getOwn = async (req, res, next) => {
-  const userInfo = general.decoded(req.headers)
-  const user = await User.find({ id: userInfo._id }).populate('posts')
-  console.log(user)
-  res.send({})
+  try {
+    const userInfo = general.decoded(req.headers)
+    const user = await User.find({ _id: userInfo._id })
+      .populate({
+        path: 'posts',
+        model: Post,
+        populate: { path: 'author', model: User },
+      })
+      .select('posts')
+    let posts = user[0].posts
+    console.log(posts)
+    res.json(posts)
+  } catch (err) {
+    res.status(500).json(err)
+    console.error(err)
+  }
+}
+
+const likePost = async (req, res, next) => {
+  try {
+    const userId = general.decoded(req.headers)._id
+    const { postId } = req.params
+    const post = await Post.findById(postId)
+
+    if (post.likes.includes(userId)) {
+      post.likes.pop(userId)
+    } else {
+      post.likes.push(userId)
+    }
+    await post.save()
+    console.log(post)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json(err)
+  }
 }
 
 router.post('/', auth, addPost)
 router.get('/getOwn', auth, getOwn)
+router.post('/like/:postId', auth, likePost)
 
 module.exports = router
