@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const { User } = require('./user.model')
 const CommentSchema = new Schema({
   author: {
-    type: [Schema.Types.ObjectId],
+    type: Schema.Types.ObjectId,
     ref: User,
     required: true,
   },
@@ -44,3 +44,4 @@ const PostSchema = new Schema({
 const Post = mongoose.model('Post', PostSchema)
 
 exports.Post = Post
+exports.Comment = Comment

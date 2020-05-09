@@ -27,5 +27,10 @@ export class RestService {
       .subscribe(res => this.generalService.openSnackBar('Success!'), err =>
         this.generalService.resolveError(err));
   }
+
+  public postObserver(route: string, object: any) {
+    return this.http.post(`/api/${route}`, object, this.generalService.getHttpOptions());
+  }
+
 }
 

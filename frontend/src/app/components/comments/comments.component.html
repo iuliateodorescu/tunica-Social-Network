@@ -1,0 +1,20 @@
+<div mat-dialog-title>Comments</div>
+<div mat-dialog-content>
+  <div>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>What's on your mind?</mat-label>
+        <textarea class="textarea" cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize" name="text" matInput placeholder="Share with everyone!"
+                  cdkAutosizeMinRows="2"
+                  cdkAutosizeMaxRows="5"
+                  cols="100"
+                  [(ngModel)]="comment.text"></textarea>
+      </mat-form-field>
+    </form>
+    <button mat-button (click)="addComment()">Comment</button>
+  </div>
+  <div *ngFor="let comment of comments">
+    <app-comment [comment]="comment"></app-comment>
+  </div>
+</div>

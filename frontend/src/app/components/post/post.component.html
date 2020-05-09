@@ -17,7 +17,8 @@
   </mat-card-content>
   <mat-card-actions >
     <div [class.alternate-button]="liked">
-    <button mat-button (click)="like()" class="primary">{{liked? 'UNLIKE' : 'LIKE'}}</button>
+      <button mat-button (click)="like()" class="primary">{{liked? 'UNLIKE' : 'LIKE'}}</button>
+      <button mat-button (click)="openComments()" class="primary">Comments</button>
     </div>
   </mat-card-actions>
 </mat-card>

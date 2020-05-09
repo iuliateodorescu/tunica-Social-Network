@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const general = require('./general')
 const auth = require('./auth')
-const { Post } = require('../models/post')
+const { Post, Comment } = require('../models/post')
 const { User } = require('../models/user.model')
 
 const addPost = async (req, res, next) => {
@@ -38,7 +38,6 @@ const getOwn = async (req, res, next) => {
       })
       .select('posts')
     let posts = user[0].posts
-    console.log(posts)
     res.json(posts)
   } catch (err) {
     res.status(500).json(err)
@@ -58,7 +57,37 @@ const likePost = async (req, res, next) => {
       post.likes.push(userId)
     }
     await post.save()
-    console.log(post)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json(err)
+  }
+}
+
+const addComment = async (req, res, next) => {
+  try {
+    const userId = general.decoded(req.headers)._id
+    const comment = new Comment({ ...req.body, author: userId })
+    await comment.save()
+    const post = await Post.findById(req.params.postId)
+    post.comments.push(comment._id)
+    await post.save()
+    res.status(201).send({})
+  } catch (err) {
+    console.error(err)
+    res.status(400).json(err)
+  }
+}
+
+const getComments = async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.postId)
+      .populate({
+        path: 'comments',
+        model: Comment,
+        populate: { path: 'author', model: User },
+      })
+      .select('comments')
+    res.json(post.comments)
   } catch (err) {
     console.error(err)
     res.status(500).json(err)
@@ -68,5 +97,7 @@ const likePost = async (req, res, next) => {
 router.post('/', auth, addPost)
 router.get('/getOwn', auth, getOwn)
 router.post('/like/:postId', auth, likePost)
+router.post('/addComment/:postId', auth, addComment)
+router.post('/comments/:postId', auth, getComments)
 
 module.exports = router

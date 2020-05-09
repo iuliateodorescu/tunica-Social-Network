@@ -29,6 +29,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ProfileComponent } from './pages/profile/profile.component';
 import { FeedComponent } from './pages/feed/feed.component';
 import { PostComponent } from './components/post/post.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { PostComponent } from './components/post/post.component';
     UserProfileComponent,
     ProfileComponent,
     FeedComponent,
-    PostComponent
+    PostComponent,
+    CommentsComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ import { PostComponent } from './components/post/post.component';
     MatDividerModule
   ],
   entryComponents: [
-    CreateGroupComponent
+    CreateGroupComponent,
+    CommentsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
