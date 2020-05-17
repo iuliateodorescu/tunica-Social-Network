@@ -1,0 +1,10 @@
+<div fxLayout="row" class="container">
+    <div fxFlex="25%" class="centered">
+      <h1>Find friends</h1>
+    <div class="divider"></div>
+    <div *ngIf="friends" fxFlex="75%" fxLayout="row wrap" fxLayoutGap="40px grid" fxLayoutAlign="space-around">
+      <div *ngFor="let friend of friends ">
+        <app-profile-card [profile]="friend"></app-profile-card>
+      </div>
+    </div>
+  </div>

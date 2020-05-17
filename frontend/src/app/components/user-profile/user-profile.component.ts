@@ -10,8 +10,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class UserProfileComponent implements OnInit {
 
   public profile = {
+    firstname:'',
+    lastname:'',
     username: '',
-    university: ''
+    university: '',
+    description:''
   };
   public photo;
 
@@ -41,7 +44,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
-  updatePhoto(){
+  updatePhoto = () => {
     this.updateProfileService.getProfile().then(profile => {
       if(profile) {
         const profile2: any = profile;

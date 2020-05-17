@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-title>{{friend.username}}</mat-card-title>
+    <mat-card-content>
+      <img src="" alt="group-img" class="image">
+      <mat-card-subtitle>
+        {{friend.university}}
+      </mat-card-subtitle>
+    </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button routerLink="../profile-view" [disabled]="disabled">View profile</button>
+        <button mat-raised-button (click)="addFriend()" [disabled]="disabled">View profile</button>
+      </mat-card-actions>
+  </mat-card>
+  

@@ -27,6 +27,9 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
+import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 
 
 @NgModule({
@@ -42,7 +45,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
     CreateGroupComponent,
     CreatePostComponent,
     UserProfileComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileCardComponent,
+    FriendsPageComponent,
+    ProfileViewComponent
   ],
   imports: [
     BrowserModule,

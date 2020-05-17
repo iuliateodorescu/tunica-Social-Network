@@ -1,6 +1,18 @@
 const mongoose = require('mongoose')
 
 const ProfileSchema = new mongoose.Schema({
+    firstname: {
+        type: String,
+        required: true,
+        minlength: 2,
+        maxlength: 15,
+    },
+    lastname: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 15,
+    },
     username: {
         type: String,
         required: true,
@@ -13,7 +25,12 @@ const ProfileSchema = new mongoose.Schema({
         required: true,
         minlength: 5,
         maxlength: 50,
-        unique: true,
+    },
+    description: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 100,
     },
     photo: {
         type: String,

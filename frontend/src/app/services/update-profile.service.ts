@@ -10,18 +10,20 @@ import { AuthService } from './auth.service';
 })
 export class UpdateProfileService {
   private user;
+  public profileSet = false;
 
   constructor( private http: HttpClient,
                private snackBar: MatSnackBar,
                private generalService: GeneralService,
                private authService: AuthService ) {
-    authService.getCurrentUser().then( user => this.user ).catch( err => console.log(err) );
+    authService.getCurrentUser().then( user => this.user = user ).catch( err => console.log(err) );
   }
 
   setProfile( profile ){
     this.http.post('/api/profile', profile, this.generalService.getHttpOptions())
       .subscribe(res => {
-          console.log('ok');
+          console.log('asd');
+          this.profileSet = true;
       },
       error => {
         console.error(error);
