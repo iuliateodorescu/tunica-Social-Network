@@ -6,11 +6,13 @@ import {HomeComponent} from './pages/home/home.component';
 import {GroupsPageComponent} from './pages/groups-page/groups-page.component';
 import {FeedComponent} from './pages/feed/feed.component';
 import {GroupPageComponent} from './pages/group-page/group-page.component';
+import {FriendsPageComponent} from './pages/friends-page/friends-page.component';
 
 
 const routes: Routes = [
   {path: 'feed', component: FeedComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'friends', component: FriendsPageComponent},
   {path: 'auth', component: AuthComponent},
   {path: 'groups', component: GroupsPageComponent},
   {path: 'group/:id', component: GroupPageComponent},

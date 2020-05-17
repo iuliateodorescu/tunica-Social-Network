@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UpdateProfileService} from '../../services/update-profile.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {GeneralService} from '../../services/general.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,15 +15,16 @@ export class UserProfileComponent implements OnInit {
     lastname: '',
     username: '',
     university: '',
-    description: ''
+    description: '',
+    photo: ''
   };
   public photo;
 
   constructor(public updateProfileService: UpdateProfileService,
               private sanitizer: DomSanitizer,
-              private cdr: ChangeDetectorRef) {
-    this.updatePhoto();
-    this.updateProfileService.getProfile().then(p => console.log(p));
+              private cdr: ChangeDetectorRef,
+              private gs: GeneralService) {
+    this.updateProfileService.getProfile().then((p:any) => this.profile = p);
   }
 
   ngOnInit() {
@@ -44,21 +46,14 @@ export class UserProfileComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files && event.target.files.length > 0) {
       const file: File = event.target.files[0];
-      this.updateProfileService.uploadPhoto(file);
-      setTimeout(this.updatePhoto, 2000);
+      this.gs.uploadImage(file).subscribe((res: any) => {
+        this.profile.photo = res.filename;
+        console.log(res.filename);
+      }, err => {
+        this.gs.resolveError(err);
+      });
     }
   }
 
-  updatePhoto = () => {
-    this.updateProfileService.getProfile().then(profile => {
-      if (profile) {
-        const profile2: any = profile;
-        this.profile = profile2;
-        if (profile2.photo) {
-          this.photo = 'http://localhost:3000/api/profile/photo/' + profile2.photo;
-          this.cdr.detectChanges();
-        }
-      }
-    });
-  };
+
 }

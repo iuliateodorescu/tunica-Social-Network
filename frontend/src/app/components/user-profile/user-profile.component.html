@@ -1,8 +1,8 @@
 <mat-card-header>
         <div mat-card-avatar class="pointer" (click)="file.click()">
           <input type="file" (change)="onFileChange($event)" accept="image/*" #file hidden>
-          <i class="material-icons" *ngIf="!photo">account_circle</i>
-          <img src="{{photo}}" alt="" *ngIf="photo" class="avatar">
+          <i class="material-icons" *ngIf="!profile.photo">account_circle</i>
+          <img mat-card-avatar [src]="this.gs.formImageLink(profile.photo)" alt="" *ngIf="profile.photo" class="image">
         </div>
         <mat-card-title>User profile</mat-card-title>
 </mat-card-header>
