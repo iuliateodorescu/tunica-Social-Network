@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: Group,
   },
+  profile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Profile',
+  }
 })
 
 UserSchema.methods.generateAuthToken = function () {

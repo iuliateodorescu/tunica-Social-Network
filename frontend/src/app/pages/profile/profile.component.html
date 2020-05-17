@@ -2,10 +2,6 @@
     <div fxFlex="33" class="one">
       <mat-card class="profile-card">
         <app-user-profile *ngIf="!updateProfileService.profileSet"></app-user-profile>
-        <app-profile-view *ngIf="updateProfileService.profileSet"></app-profile-view>
-        <mat-card-footer *ngIf="updateProfileService.profileSet">
-          <button mat-raised-button routerLink="../../components/user-profile" [disabled]="disabled">Update profile</button>
-        </mat-card-footer>
       </mat-card>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-profile-card',
@@ -8,13 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProfileCardComponent implements OnInit {
   @Input() friend;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  addFriend(){
-    
+  addFriend() {
+
   }
 
 }

@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { UpdateProfileService } from '../../services/update-profile.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {UpdateProfileService} from '../../services/update-profile.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,11 +10,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class UserProfileComponent implements OnInit {
 
   public profile = {
-    firstname:'',
-    lastname:'',
+    firstname: '',
+    lastname: '',
     username: '',
     university: '',
-    description:''
+    description: ''
   };
   public photo;
 
@@ -22,6 +22,7 @@ export class UserProfileComponent implements OnInit {
               private sanitizer: DomSanitizer,
               private cdr: ChangeDetectorRef) {
     this.updatePhoto();
+    this.updateProfileService.getProfile().then(p => console.log(p));
   }
 
   ngOnInit() {
@@ -32,12 +33,16 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    this.updateProfileService.setProfile(this.profile);
+    if (this.profile['_id']) {
+      this.updateProfileService.update(this.profile);
+    } else {
+      this.updateProfileService.setProfile(this.profile);
+    }
     console.log(this.profile);
   }
 
-  onFileChange(event){
-    if( event.target.files && event.target.files.length > 0 ){
+  onFileChange(event) {
+    if (event.target.files && event.target.files.length > 0) {
       const file: File = event.target.files[0];
       this.updateProfileService.uploadPhoto(file);
       setTimeout(this.updatePhoto, 2000);
@@ -46,14 +51,14 @@ export class UserProfileComponent implements OnInit {
 
   updatePhoto = () => {
     this.updateProfileService.getProfile().then(profile => {
-      if(profile) {
+      if (profile) {
         const profile2: any = profile;
         this.profile = profile2;
-        if( profile2.photo ){
+        if (profile2.photo) {
           this.photo = 'http://localhost:3000/api/profile/photo/' + profile2.photo;
           this.cdr.detectChanges();
         }
       }
     });
-  }
+  };
 }

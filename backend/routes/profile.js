@@ -6,6 +6,7 @@ const router = express.Router()
 const upload = require('../middleware/upload')
 
 router.post('/', auth, profileMiddleware.setProfile)
+router.put('/', auth, profileMiddleware.update)
 router.get('/', auth, profileMiddleware.getProfile)
 router.post('/photo', [auth, upload], profileMiddleware.uploadPhoto)
 router.get('/photo/:filename',profileMiddleware.getImage)
