@@ -1,4 +1,5 @@
-<div fxLayout="column" class="create">
+<div mat-dialog-title>Comments</div>
+<div mat-dialog-content>
   <div>
     <form class="example-form">
       <mat-form-field class="example-full-width">
@@ -8,14 +9,12 @@
                   cdkAutosizeMinRows="2"
                   cdkAutosizeMaxRows="5"
                   cols="100"
-                  [(ngModel)]="post.text"></textarea>
+                  [(ngModel)]="comment.text"></textarea>
       </mat-form-field>
-
-      <div mat-card-avatar class="pointer" (click)="file.click()">
-        <input type="file" (change)="onFileChange($event)" accept="image/*" #file hidden>
-        <i class="material-icons" fxFlexAlign="end">add_photo_alternate</i>
-      </div>
     </form>
+    <button mat-button (click)="addComment()">Comment</button>
   </div>
-  <button mat-raised-button (click)="submit()" class="but" color="primary">Submit</button>
+  <div *ngFor="let comment of comments">
+    <app-comment [comment]="comment"></app-comment>
+  </div>
 </div>

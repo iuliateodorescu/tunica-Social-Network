@@ -27,6 +27,11 @@ import { CreateGroupComponent } from './components/create-group/create-group.com
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { FeedComponent } from './pages/feed/feed.component';
+import { PostComponent } from './components/post/post.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { GroupPageComponent } from './pages/group-page/group-page.component';
 import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
@@ -46,6 +51,11 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
     CreatePostComponent,
     UserProfileComponent,
     ProfileComponent,
+    FeedComponent,
+    PostComponent,
+    CommentsComponent,
+    CommentComponent,
+    GroupPageComponent,
     ProfileCardComponent,
     FriendsPageComponent,
     ProfileViewComponent
@@ -70,7 +80,8 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
     MatDividerModule
   ],
   entryComponents: [
-    CreateGroupComponent
+    CreateGroupComponent,
+    CommentsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

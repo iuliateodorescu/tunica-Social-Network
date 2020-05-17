@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material';
 
 @Injectable({
@@ -7,7 +7,8 @@ import {MatSnackBar} from '@angular/material';
 })
 export class GeneralService {
 
-  constructor(private snackBar: MatSnackBar) {
+  constructor(private snackBar: MatSnackBar,
+              private http: HttpClient) {
   }
 
   public getHttpOptions() {
@@ -28,14 +29,41 @@ export class GeneralService {
   }
 
   public formatError(error: string) {
-    error = error.replace('"', '');
-    error = error.replace('"', '');
-    error = error.charAt(0).toUpperCase() + error.substring(1) + '.';
-    return error;
+    if (error) {
+      error = error.replace('"', '');
+      error = error.replace('"', '');
+      error = error.charAt(0).toUpperCase() + error.substring(1) + '.';
+      return error;
+    } else {
+      console.error(error);
+    }
   }
 
   public openSnackBar(message: string, duration: number = 1) {
     this.snackBar.open(message, '', {duration: duration * 1000});
+  }
+
+  public uploadPhoto(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    console.log(file, formData);
+    this.http.post('api/photo', formData, this.getHttpOptions())
+      .subscribe(res => {
+        console.log(res);
+      }, error => {
+        this.resolveError(error);
+      });
+  }
+
+  public uploadImage(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post('api/general/image', formData, this.getHttpOptions());
+  }
+
+  public formImageLink(fileName) {
+    const url = 'http://localhost:3000/api/general/image/' + fileName;
+    return url;
   }
 
 }

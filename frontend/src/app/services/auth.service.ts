@@ -9,11 +9,13 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
   public isLoggedIn = localStorage.getItem('token') || false;
+  public userId;
 
   constructor(private http: HttpClient,
               private snackBar: MatSnackBar,
               private generalService: GeneralService,
               private router: Router) {
+    this.refreshUserId();
   }
 
 
@@ -33,6 +35,7 @@ export class AuthService {
       .subscribe(res => {
           this.storeToken(res);
           this.isLoggedIn = true;
+          this.refreshUserId();
         },
         error => {
           console.error(error);
@@ -55,8 +58,15 @@ export class AuthService {
     });
   }
 
+  refreshUserId() {
+    this.getCurrentUser().then((u: any) => {
+      this.userId = u._id;
+    });
+  }
+
   signOut() {
     localStorage.clear();
+    this.userId = '';
     this.isLoggedIn = false;
   }
 }

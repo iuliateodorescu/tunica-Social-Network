@@ -1,0 +1,24 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <img src="../../../assets/images/profile_icon.png" alt="profile-image" class="example-header-image" mat-card-avatar>
+    <mat-card-title>{{post.author.email}}</mat-card-title>
+    <mat-card-subtitle>{{post.author.profile}}</mat-card-subtitle>
+  </mat-card-header>
+  <img class="image" mat-card-image [src]="this.gs.formImageLink(post.image)" *ngIf="post.image">
+  <mat-card-content>
+    <p>
+      {{post.text}}
+    </p>
+    <mat-card-footer class="stats">
+      <div>
+        <p>{{post.likes.length}} likes</p>
+      </div>
+    </mat-card-footer>
+  </mat-card-content>
+  <mat-card-actions >
+    <div [class.alternate-button]="liked">
+      <button mat-button (click)="like()" class="primary">{{liked? 'UNLIKE' : 'LIKE'}}</button>
+      <button mat-button (click)="openComments()" class="primary">Comments</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,6 @@
+<div fxLayout="column" class="centered container">
+  <app-create-post [type]="{text:'group',groupId: groupId}"></app-create-post>
+  <div *ngFor="let post of posts">
+    <app-post [post]="post"></app-post>
+  </div>
+</div>

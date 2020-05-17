@@ -1,5 +1,7 @@
 const { Group } = require('../models/group')
 const { User } = require('../models/user.model')
+const { Post } = require('../models/post')
+const auth = require('./auth')
 const express = require('express')
 const router = express.Router()
 
@@ -25,9 +27,9 @@ async function addUserToGroup(req, res) {
     const group = await Group.findById(groupId)
     group.members.push(userId)
     await group.save()
-    const user=await User.findById(userId)
-    if(!user.groups) {
-      user.groups=[]
+    const user = await User.findById(userId)
+    if (!user.groups) {
+      user.groups = []
     }
     user.groups.push(groupId)
     await user.save()
@@ -38,8 +40,29 @@ async function addUserToGroup(req, res) {
   }
 }
 
+const getPosts = async (req, res, next) => {
+  try {
+    const groupsId = req.params.id
+    console.log(groupsId)
+    const group = await Group.findById(groupsId)
+      .populate({
+        path: 'posts',
+        model: Post,
+        populate: { path: 'author', model: User },
+      })
+      .select('posts')
+    console.log(group)
+    let posts = group[0].posts
+    res.json(posts)
+  } catch (err) {
+    res.status(500).json(err)
+    console.error(err)
+  }
+}
+
 router.post('/create', create)
 router.post('/addUserToGroup', addUserToGroup)
 router.get('/getAll', getAll)
+router.get('/getPosts/:id', auth, getPosts)
 
 module.exports = router

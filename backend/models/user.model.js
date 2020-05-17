@@ -22,10 +22,16 @@ const UserSchema = new mongoose.Schema({
   groups: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: Group,
+    default: []
   },
   profile: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Profile',
+  },
+  posts: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Post',
+    default: []
   }
 })
 

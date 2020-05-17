@@ -25,11 +25,14 @@ const GroupSchema = new Schema({
   members: {
     type: [Schema.Types.ObjectId],
     ref: 'User',
-    unique: true
   },
   title: {
     type: String,
     unique: false,
+  },
+  posts:  {
+    type: [Schema.Types.ObjectId],
+    ref: 'Post',
   },
 })
 

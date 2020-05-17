@@ -234,4 +234,5 @@ fabric.properties
 .idea/**/markdown-navigator.xml
 .idea/**/markdown-navigator/
 
+backend/assets/images
 # End of https://www.gitignore.io/api/node,angular,webstorm,visualstudiocode

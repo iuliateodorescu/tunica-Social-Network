@@ -1,0 +1,29 @@
+.create{
+  background: rgba(175, 175, 170, 0.3);
+  width:400px;
+  border-radius: 10px;
+}
+
+.but {
+  width: 100%;
+}
+
+.textarea {
+  width: 100% !important;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: auto !important;
+}
+
+.material-icons {
+  margin-left: 10px;
+}
+
+.material-icons:hover {
+  cursor: pointer;
+}
+
+.example-full-width {
+  margin: 10px 10px 0 10px;
+}
