@@ -86,13 +86,8 @@ module.exports = {
       const userId = req.params.id
       console.log(userId)
       const user = await User.findById(userId)
-        .populate({
-          path: 'friends',
-          model: 'Profile',
-        })
-        .select('friends')
       console.log(user)
-      let friends = user[0].friends
+      let friends = user.friends
       res.json(friends)
     } catch (err) {
       res.status(500).json(err)
@@ -100,8 +95,13 @@ module.exports = {
     }
   },
 
+
   getAll: async (req, res) => {
-    const users = await User.find()
+    const users = await User.find({}).populate({
+      path:'profile',
+      model: 'Profile'
+    })
+    console.log(users[0])
     res.send(users)
   }
  

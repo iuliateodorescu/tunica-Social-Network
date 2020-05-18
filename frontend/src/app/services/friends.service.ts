@@ -16,12 +16,12 @@ export class FriendsService {
               private gs: GeneralService ) { } 
 
   public getAll(): Observable<any> {
-    return this.rest.getAll('friends/getAll');
+    return this.rest.getAll('user/getAll');
   }
 
   public async addFriend(receiverId) {
     const sender: any = await this.auth.getCurrentUser();
     const obj = {senderId: sender._id, receiverId};
-    return this.http.post('/api/friends', obj, this.gs.getHttpOptions()).toPromise();
+    return this.http.post('/api/user/addFriend', obj, this.gs.getHttpOptions()).toPromise();
   }
 }
