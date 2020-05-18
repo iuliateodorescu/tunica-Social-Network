@@ -65,4 +65,44 @@ module.exports = {
     res.send(user)
   },
 
+  addFriend: async (req, res) => {
+    try{
+      const {senderId, receiverId} = req.body
+      const sender = await User.findById(senderId)
+      const receiver = await User.findById(receiverId)
+      sender.friends.push(receiverId)
+      await sender.save()
+      receiver.friends.push(senderId)
+      await receiver.save()
+      res.status(200).send({}) 
+    }catch (err) {
+      console.error(err)
+      res.status(500).send(err)
+    }
+  },
+
+  getFriends: async (req, res, next) => {
+    try {
+      const userId = req.params.id
+      console.log(userId)
+      const user = await User.findById(userId)
+        .populate({
+          path: 'friends',
+          model: 'Profile',
+        })
+        .select('friends')
+      console.log(user)
+      let friends = user[0].friends
+      res.json(friends)
+    } catch (err) {
+      res.status(500).json(err)
+      console.error(err)
+    }
+  },
+
+  getAll: async (req, res) => {
+    const users = await User.find()
+    res.send(users)
+  }
+ 
 }

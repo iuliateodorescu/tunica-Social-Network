@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UpdateProfileService } from '../../services/update-profile.service';
+import { Component, Input, OnInit } from '@angular/core';
+import {GeneralService} from '../../services/general.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-profile-view',
@@ -8,14 +9,16 @@ import { UpdateProfileService } from '../../services/update-profile.service';
 })
 export class ProfileViewComponent implements OnInit {
 
-  public profile;
+  @Input() userId;
 
-  constructor(public updateProfileService: UpdateProfileService) { 
-    updateProfileService.getProfile().then( profile => this.profile = profile ).catch( err => console.log(err) );
+  constructor(public gs: GeneralService,
+              private route: ActivatedRoute) {
+    this.userId = this.route.snapshot.params.id;
+    console.log(this.userId);            
   }
 
   ngOnInit() {
   }
 
-
+  
 }

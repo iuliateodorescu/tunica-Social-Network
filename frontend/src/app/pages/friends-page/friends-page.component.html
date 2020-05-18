@@ -1,11 +1,20 @@
 <div fxLayout="row" class="container">
   <div fxFlex="25%" class="centered">
     <h1>Find friends</h1>
-    <div class="divider"></div>
-    <div *ngIf="friends" fxFlex="75%" fxLayout="row wrap" fxLayoutGap="40px grid" fxLayoutAlign="space-around">
-      <div *ngFor="let friend of friends ">
-        <app-profile-card [friend]="friend"></app-profile-card>
-      </div>
+    <div class="filters" fxLayout="column">
+      <mat-form-field>
+        <mat-label>University</mat-label>
+        <mat-select [(ngModel)]="filters.university" name="university" (ngModelChange)="onUniChange($event)">
+          <mat-option *ngFor="let university of universities" [value]="university">{{university.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div *ngIf="friends" fxFlex="75%" fxLayout="row wrap" fxLayoutGap="40px grid" fxLayoutAlign="space-around">
+    <div *ngFor="let friend of friends ">
+      <app-profile-card [friend]="friend"></app-profile-card>
     </div>
   </div>
 </div>
