@@ -95,6 +95,20 @@ module.exports = {
     }
   },
 
+  getFriendProfile: async (req, res) => {
+    try {
+      const friendId = req.params.id
+      const friend = await User.findById(friendId).select('profile')
+      const profile = await Profile.findById(friend.profile)
+      console.log(friend.profile)
+      // console.log(profile)
+      res.json(profile)
+    } catch (err) {
+      console.error(err)
+      res.status(500).send(err)
+    }
+  }
+
 
   getAll: async (req, res) => {
     const users = await User.find({}).populate({

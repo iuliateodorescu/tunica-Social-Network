@@ -24,4 +24,9 @@ export class FriendsService {
     const obj = {senderId: sender._id, receiverId};
     return this.http.post('/api/user/addFriend', obj, this.gs.getHttpOptions()).toPromise();
   }
+
+  public getFriendProfile(): Observable<any> {
+    return this.rest.getOne('user/getFriend');
+  }
+
 }

@@ -37,7 +37,7 @@ export class ProfileCardComponent implements OnInit {
 
   openProfile() {
     console.log(this.friend._id);
-    this.router.navigate(['users/' + this.friend._id]);
+    this.router.navigate(['friend/' + this.friend._id]);
   }
 
 }

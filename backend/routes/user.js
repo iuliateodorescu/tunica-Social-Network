@@ -9,6 +9,7 @@ router.post('/register', userMiddleware.register)
 router.post('/login', userMiddleware.login)
 router.post('/addFriend', userMiddleware.addFriend)
 router.get('/getAll', userMiddleware.getAll)
+router.get('/getFriend', userMiddleware.getFriendProfile)
 
 
 module.exports = router

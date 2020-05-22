@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {GeneralService} from '../../services/general.service';
 import {ActivatedRoute} from '@angular/router';
+import {FriendsService} from '../../services/friends.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -8,16 +9,20 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./profile-view.component.scss']
 })
 export class ProfileViewComponent implements OnInit {
-
+  public profile;
   @Input() userId;
 
-  constructor(public gs: GeneralService,
+  constructor(public friendsService: FriendsService,
+              public gs: GeneralService,
               private route: ActivatedRoute) {
     this.userId = this.route.snapshot.params.id;
     console.log(this.userId);            
   }
 
   ngOnInit() {
+    this.friendsService.getFriendProfile().subscribe(res => {
+      this.profile = res;
+    });
   }
 
   
