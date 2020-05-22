@@ -1,8 +1,8 @@
-<mat-card>
+<mat-card *ngIf="friend">
     <mat-card-title>{{friend.username}}</mat-card-title>
     <mat-card-content>
-      
-      <img [src]="this.gs.formImageLink(friend.profile.photo)" alt="profile photo" *ngIf="friend.profile.photo" class="image">
+
+      <img [src]="this.gs.formImageLink(friend.photo)" alt="profile photo" *ngIf="friend.photo" class="image">
       <mat-card-subtitle>
         {{friend.university}}
       </mat-card-subtitle>
@@ -12,4 +12,4 @@
         <button mat-raised-button (click)="openProfile()" [disabled]="disabled">View profile</button>
       </mat-card-actions>
   </mat-card>
-  
+

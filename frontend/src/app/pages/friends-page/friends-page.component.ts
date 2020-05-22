@@ -12,6 +12,7 @@ export class FriendsPageComponent implements OnInit {
   public friends = [];
   public allfriends = [];
   public universities = [];
+  public friends2;
   public filters = {
     university: {_id: ''}
   };
@@ -28,9 +29,11 @@ export class FriendsPageComponent implements OnInit {
   }
 
    public refresh() {
-    this.friendsService.getAll().subscribe(res => {
+     this.friends2 = this.friendsService.getAll().subscribe();
+    this.friends2 = this.friendsService.getAll().subscribe(res => {
       this.friends = res;
       this.allfriends = res;
+      console.log(res)
     });
   }
 

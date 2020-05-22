@@ -11,14 +11,16 @@ import {Router} from '@angular/router';
 })
 export class ProfileCardComponent implements OnInit {
   @Input() friend;
+  @Input() userId;
 
   public disabled = false;
 
   constructor(private friendsService: FriendsService,
               private auth: AuthService,
               private gs: GeneralService,
-              private router: Router) { 
+              private router: Router) {
     this.auth.getCurrentUser().then((user: any) => this.disabled = user.friends.find(f => f === this.friend._id));
+
   }
 
   ngOnInit() {
@@ -36,7 +38,6 @@ export class ProfileCardComponent implements OnInit {
   }
 
   openProfile() {
-    console.log(this.friend._id);
     this.router.navigate(['friend/' + this.friend._id]);
   }
 

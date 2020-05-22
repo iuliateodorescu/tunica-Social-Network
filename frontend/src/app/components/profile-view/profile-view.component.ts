@@ -16,14 +16,15 @@ export class ProfileViewComponent implements OnInit {
               public gs: GeneralService,
               private route: ActivatedRoute) {
     this.userId = this.route.snapshot.params.id;
-    console.log(this.userId);            
+    console.log(this.userId);
   }
 
   ngOnInit() {
-    this.friendsService.getFriendProfile().subscribe(res => {
+    this.friendsService.getFriendProfile(this.userId).subscribe(res => {
       this.profile = res;
+      console.log(res);
     });
   }
 
-  
+
 }

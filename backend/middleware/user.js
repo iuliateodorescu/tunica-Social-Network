@@ -1,4 +1,5 @@
 const { User, validate } = require('../models/user.model')
+const { Profile } = require('../models/profile.model')
 const bcrypt = require('bcrypt')
 
 module.exports = {
@@ -97,17 +98,15 @@ module.exports = {
 
   getFriendProfile: async (req, res) => {
     try {
-      const friendId = req.params.id
-      const friend = await User.findById(friendId).select('profile')
-      const profile = await Profile.findById(friend.profile)
-      console.log(friend.profile)
-      // console.log(profile)
+      const friendId = req.body.id
+      console.log(friendId)
+      const profile = await Profile.findById(friendId)
       res.json(profile)
     } catch (err) {
       console.error(err)
       res.status(500).send(err)
     }
-  }
+  },
 
 
   getAll: async (req, res) => {

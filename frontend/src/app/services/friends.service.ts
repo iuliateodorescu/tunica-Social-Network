@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {RestService} from './rest.service';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
@@ -13,7 +13,8 @@ export class FriendsService {
   constructor(private rest: RestService,
               private http: HttpClient,
               private auth: AuthService,
-              private gs: GeneralService ) { } 
+              private gs: GeneralService) {
+  }
 
   public getAll(): Observable<any> {
     return this.rest.getAll('user/getAll');
@@ -25,8 +26,8 @@ export class FriendsService {
     return this.http.post('/api/user/addFriend', obj, this.gs.getHttpOptions()).toPromise();
   }
 
-  public getFriendProfile(): Observable<any> {
-    return this.rest.getOne('user/getFriend');
+  public getFriendProfile(id: string) {
+    return this.rest.postObserver('user/getFriend', {id});
   }
 
 }
