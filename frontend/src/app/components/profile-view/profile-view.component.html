@@ -1,6 +1,12 @@
-<mat-card-content>
-    <img img [src]="this.gs.formImageLink(profile.photo)" alt="" *ngIf="profile.photo" class="image">
-    <mat-card-title>{{profile.firstname}} {{profile.lastname}}</mat-card-title>
-    <mat-card-subtitle>University: {{profile.university}}</mat-card-subtitle>
-    <p>{{profile.description}}</p>
-</mat-card-content>
+<div fxLayout="column" class="zero fullScreen" fxLayoutAlign="center center">
+    <div fxFlex="33" class="one">
+      <mat-card class="profile-card">
+        <mat-card-content>
+            <img img [src]="this.gs.formImageLink(profile.photo)" alt="" *ngIf="profile.photo" class="image">
+            <mat-card-title>{{profile.firstname}} {{profile.lastname}}</mat-card-title>
+            <mat-card-subtitle>University: {{profile.university}}</mat-card-subtitle>
+            <p>{{profile.description}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+</div>

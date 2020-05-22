@@ -1,7 +1,7 @@
 <mat-card *ngIf="friend">
     <mat-card-title>{{friend.username}}</mat-card-title>
     <mat-card-content>
-
+      <img src="../../../assets/images/profile-placeholder.jpg" alt="profile photo" *ngIf="!friend.photo" class="image">
       <img [src]="this.gs.formImageLink(friend.photo)" alt="profile photo" *ngIf="friend.photo" class="image">
       <mat-card-subtitle>
         {{friend.university}}
@@ -11,5 +11,5 @@
         <button mat-raised-button (click)="addFriend()" [disabled]="disabled">Add friend</button>
         <button mat-raised-button (click)="openProfile()" [disabled]="disabled">View profile</button>
       </mat-card-actions>
-  </mat-card>
+</mat-card> 
 
