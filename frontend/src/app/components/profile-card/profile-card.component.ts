@@ -19,7 +19,7 @@ export class ProfileCardComponent implements OnInit {
               private auth: AuthService,
               private gs: GeneralService,
               private router: Router) {
-    this.auth.getCurrentUser().then((user: any) => this.disabled = user.friends.find(f => f === this.friend._id));
+    this.auth.getCurrentUser().then((user: any) => this.disabled = user.friends.find(f => f === this.userId));
 
   }
 
@@ -28,7 +28,7 @@ export class ProfileCardComponent implements OnInit {
 
   async addFriend() {
     try {
-      await this.friendsService.addFriend(this.friend._id);
+      await this.friendsService.addFriend(this.userId);
       this.disabled = true;
       this.gs.openSnackBar('Success!');
     } catch (e) {
@@ -38,7 +38,7 @@ export class ProfileCardComponent implements OnInit {
   }
 
   openProfile() {
-    this.router.navigate(['friend/' + this.friend._id]);
+    this.router.navigate(['friend/' + this.userId]);
   }
 
 }
