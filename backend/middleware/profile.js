@@ -36,14 +36,13 @@ const update = async (req, res) => {
 const getProfile = async (req, res) => {
   try {
     const userId = generalMid.decoded(req.headers)._id
-    const user = await User.findById(userId).select('profile')
-    const profile = await (await Profile.findById(user.profile)).populated({
-      path: 'university',
-      model: 'University',
+    const user = await User.findById(userId).populate({
+      path: 'profile',
+      model: 'Profile',
+      populate: { path: 'university', model: 'University' },
     })
-    console.log(user.profile)
-    // console.log(profile)
-    res.json(profile)
+    console.log(user)
+    res.json(user.profile)
   } catch (err) {
     console.error(err)
     res.status(500).send(err)
