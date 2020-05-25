@@ -16,7 +16,7 @@ if (!config.get('privateKey')) {
 console.log('Connecting to mongo...')
 
 mongoose
-  .connect('mongodb://localhost/studnet', {
+  .connect('mongodb://172.17.0.1/studnet', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
