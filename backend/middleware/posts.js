@@ -43,8 +43,16 @@ const getOwn = async (req, res, next) => {
     const user = await User.find({ _id: userInfo._id })
       .populate({
         path: 'posts',
-        model: Post,
-        populate: { path: 'author', model: User },
+        model: 'Post',
+        populate: {
+          path: 'author',
+          model: User,
+          populate: {
+            path: 'profile',
+            model: 'Profile',
+            populate: { path: 'university', model: 'University' },
+          },
+        },
       })
       .select('posts')
     let posts = user[0].posts

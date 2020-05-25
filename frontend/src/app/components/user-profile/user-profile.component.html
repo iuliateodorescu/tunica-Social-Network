@@ -17,8 +17,11 @@
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Username" [(ngModel)]="profile.username" name="username">
           </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="University" [(ngModel)]="profile.university" name="university">
+          <mat-form-field>
+            <mat-label>University</mat-label>
+            <mat-select [(ngModel)]="profile.university" name="university">
+              <mat-option *ngFor="let university of universities" [value]="university">{{university.name}}</mat-option>
+            </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <textarea matInput placeholder="About me" [(ngModel)]="profile.description" name="description"></textarea>

@@ -21,7 +21,7 @@ const setProfile = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const profile = await Profile.findByIdAndUpdate(req.body._id,req.body)
+    const profile = await Profile.findByIdAndUpdate(req.body._id, req.body)
     const userId = generalMid.decoded(req.headers)._id
     const user = await User.findById(userId)
     user.profile = profile
@@ -33,12 +33,14 @@ const update = async (req, res) => {
   }
 }
 
-
 const getProfile = async (req, res) => {
   try {
     const userId = generalMid.decoded(req.headers)._id
     const user = await User.findById(userId).select('profile')
-    const profile = await Profile.findById(user.profile)
+    const profile = await (await Profile.findById(user.profile)).populated({
+      path: 'university',
+      model: 'University',
+    })
     console.log(user.profile)
     // console.log(profile)
     res.json(profile)
@@ -79,5 +81,5 @@ module.exports = {
   getProfile,
   uploadPhoto,
   getImage,
-  update
+  update,
 }

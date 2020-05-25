@@ -3,7 +3,7 @@
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>{{profile.username}}</mat-card-title>
-          <mat-card-subtitle>{{profile.university}}</mat-card-subtitle>
+          <mat-card-subtitle>{{profile.university.name}}</mat-card-subtitle>
         </mat-card-header>
         <img src="../../../assets/images/profile-placeholder.jpg" alt="profile photo" *ngIf="!profile.photo" class="image">
         <img mat-card-image [src]="this.gs.formImageLink(profile.photo)" alt="" *ngIf="profile.photo">

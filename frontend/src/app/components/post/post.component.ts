@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.liked = this.post.likes.includes(this.auth.userId);
+    console.log(this.post)
   }
 
   like() {

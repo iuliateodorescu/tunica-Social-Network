@@ -43,12 +43,19 @@ async function addUserToGroup(req, res) {
 const getPosts = async (req, res, next) => {
   try {
     const groupsId = req.params.id
-    const group = await Group.findById(groupsId)
-      .populate({
-        path: 'posts',
-        model: 'Post',
-        populate: { path: 'author', model: User },
-      })
+    const group = await Group.findById(groupsId).populate({
+      path: 'posts',
+      model: 'Post',
+      populate: {
+        path: 'author',
+        model: User,
+        populate: {
+          path: 'profile',
+          model: 'Profile',
+          populate: { path: 'university', model: 'University' },
+        },
+      },
+    })
     let posts = group.posts
     res.json(posts)
   } catch (err) {

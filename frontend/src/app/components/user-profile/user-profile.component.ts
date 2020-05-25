@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UpdateProfileService} from '../../services/update-profile.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {GeneralService} from '../../services/general.service';
+import {RestService} from '../../services/rest.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,12 +20,20 @@ export class UserProfileComponent implements OnInit {
     photo: ''
   };
   public photo;
+  public universities;
 
   constructor(public updateProfileService: UpdateProfileService,
               private sanitizer: DomSanitizer,
               private cdr: ChangeDetectorRef,
-              public gs: GeneralService) {
+              public gs: GeneralService,
+              public rest: RestService) {
     this.updateProfileService.getProfile().then((p:any) => this.profile = p);
+
+    this.rest.getAll('university').subscribe(res => {
+      this.universities = res;
+      // @ts-ignore
+      this.locations = [...(new Set(res.map(u => u.city)))];
+    });
   }
 
   ngOnInit() {

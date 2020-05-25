@@ -5,9 +5,9 @@ const bcrypt = require('bcrypt')
 module.exports = {
   register: async (req, res) => {
     try {
-        console.log(req.body)
+      console.log(req.body)
       const { error } = validate(req.body)
-      console.log(error);
+      console.log(error)
       if (error) return res.status(400).send(error.details[0].message)
       let user = await User.findOne({ email: req.body.email })
 
@@ -36,13 +36,13 @@ module.exports = {
   login: async (req, res) => {
     let reqUser = req.body
     let dbUser = await User.findOne({ email: req.body.email })
-    if(!dbUser) {
-        res.status(400).send("User does not exist")
-        return
+    if (!dbUser) {
+      res.status(400).send('User does not exist')
+      return
     }
     bcrypt
       .compare(reqUser.password, dbUser.password)
-      .then(equal => {
+      .then((equal) => {
         if (equal) {
           const user = dbUser
           const token = user.generateAuthToken()
@@ -51,7 +51,7 @@ module.exports = {
           res.status(400).send('Wrong password')
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
         res.status(500).send(err)
       })
@@ -63,16 +63,16 @@ module.exports = {
   },
 
   addFriend: async (req, res) => {
-    try{
-      const {senderId, receiverId} = req.body
+    try {
+      const { senderId, receiverId } = req.body
       const sender = await User.findById(senderId)
       const receiver = await User.findById(receiverId)
       sender.friends.push(receiverId)
       await sender.save()
       receiver.friends.push(senderId)
       await receiver.save()
-      res.status(200).send({}) 
-    }catch (err) {
+      res.status(200).send({})
+    } catch (err) {
       console.error(err)
       res.status(500).send(err)
     }
@@ -93,7 +93,11 @@ module.exports = {
   getFriendProfile: async (req, res) => {
     try {
       const friendId = req.body.id
-      const user = await User.findById(friendId).populate({path: 'profile',model: 'Profile'})
+      const user = await User.findById(friendId).populate({
+        path: 'profile',
+        model: 'Profile',
+        populate: { path: 'university', model: 'University' },
+      })
       res.json(user.profile)
     } catch (err) {
       console.error(err)
@@ -101,13 +105,12 @@ module.exports = {
     }
   },
 
-
   getAll: async (req, res) => {
     const users = await User.find({}).populate({
-      path:'profile',
-      model: 'Profile'
+      path: 'profile',
+      model: 'Profile',
+      populate: { path: 'university', model: 'University' },
     })
     res.send(users)
-  }
- 
+  },
 }
