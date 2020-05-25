@@ -36,7 +36,6 @@ module.exports = {
   login: async (req, res) => {
     let reqUser = req.body
     let dbUser = await User.findOne({ email: req.body.email })
-    console.log(dbUser)
     if(!dbUser) {
         res.status(400).send("User does not exist")
         return
@@ -62,6 +61,7 @@ module.exports = {
   },
 
   getCurrent: async (req, res) => {
+    console.log(userId)
     const user = await User.findById(req.user._id).select('-password')
     res.send(user)
   },
@@ -85,9 +85,7 @@ module.exports = {
   getFriends: async (req, res, next) => {
     try {
       const userId = req.params.id
-      console.log(userId)
       const user = await User.findById(userId)
-      console.log(user)
       let friends = user.friends
       res.json(friends)
     } catch (err) {
@@ -114,7 +112,6 @@ module.exports = {
       path:'profile',
       model: 'Profile'
     })
-    console.log(users[0])
     res.send(users)
   }
  

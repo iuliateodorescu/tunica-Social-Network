@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material';
 import {GeneralService} from './general.service';
 import {Router} from '@angular/router';
 import {AuthService} from './auth.service';
+import {backendUrl} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UpdateProfileService {
   }
 
   setProfile(profile) {
-    this.http.post('/api/profile', profile, this.generalService.getHttpOptions())
+    this.http.post(`${backendUrl}/profile`, profile, this.generalService.getHttpOptions())
       .subscribe(res => {
           this.generalService.openSnackBar('Success!');
         },
@@ -32,7 +33,7 @@ export class UpdateProfileService {
 
   getProfile() {
     return new Promise((resolve, reject) => {
-      this.http.get('/api/profile', this.generalService.getHttpOptions())
+      this.http.get(`${backendUrl}/profile`, this.generalService.getHttpOptions())
         .subscribe(res => {
             resolve(res);
           },
@@ -48,7 +49,7 @@ export class UpdateProfileService {
     const formData = new FormData();
     formData.append('file', file);
     console.log(file, formData);
-    this.http.post('api/profile/photo', formData, this.generalService.getHttpOptions())
+    this.http.post(`${backendUrl}/profile/photo`, formData, this.generalService.getHttpOptions())
       .subscribe(res => {
           console.log(res);
         },
@@ -59,7 +60,7 @@ export class UpdateProfileService {
 
   update(profile) {
     console.log(profile);
-    this.http.put('/api/profile', profile, this.generalService.getHttpOptions())
+    this.http.put(`${backendUrl}/profile`, profile, this.generalService.getHttpOptions())
       .subscribe(res => {
           this.generalService.openSnackBar('Success!');
         },
@@ -71,7 +72,7 @@ export class UpdateProfileService {
 
   async getPhoto() {
     const profile: any = await this.getProfile();
-    this.http.get('api/profile/photo/' + profile.photo, this.generalService.getHttpOptions())
+    this.http.get(`${backendUrl}/profile/photo/` + profile.photo, this.generalService.getHttpOptions())
       .subscribe(res => {
           return res;
         },

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {GeneralService} from './general.service';
+import {backendUrl} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +18,17 @@ export class FriendsService {
   }
 
   public getAll(): Observable<any> {
-    return this.rest.getAll('user/getAll');
+    return this.rest.getAll(`user/getAll`);
   }
 
   public async addFriend(receiverId) {
     const sender: any = await this.auth.getCurrentUser();
     const obj = {senderId: sender._id, receiverId};
-    return this.http.post('/api/user/addFriend', obj, this.gs.getHttpOptions()).toPromise();
+    return this.http.post(`${backendUrl}/user/addFriend`, obj, this.gs.getHttpOptions()).toPromise();
   }
 
   public getFriendProfile(id: string) {
-    return this.rest.postObserver('user/getFriend', {id});
+    return this.rest.postObserver(`user/getFriend`, {id});
   }
 
 }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material';
+import {backendUrl} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class GeneralService {
     const formData = new FormData();
     formData.append('file', file);
     console.log(file, formData);
-    this.http.post('api/photo', formData, this.getHttpOptions())
+    this.http.post(`${backendUrl}/photo`, formData, this.getHttpOptions())
       .subscribe(res => {
         console.log(res);
       }, error => {
@@ -58,11 +59,11 @@ export class GeneralService {
   public uploadImage(file) {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post('api/general/image', formData, this.getHttpOptions());
+    return this.http.post(`${backendUrl}/general/image`, formData, this.getHttpOptions());
   }
 
   public formImageLink(fileName) {
-    const url = 'http://localhost:3000/api/general/image/' + fileName;
+    const url = `${backendUrl}/general/image/${fileName}`;
     return url;
   }
 
