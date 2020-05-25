@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
   constructor(public updateProfileService: UpdateProfileService,
               private sanitizer: DomSanitizer,
               private cdr: ChangeDetectorRef,
-              private gs: GeneralService) {
+              public gs: GeneralService) {
     this.updateProfileService.getProfile().then((p:any) => this.profile = p);
   }
 

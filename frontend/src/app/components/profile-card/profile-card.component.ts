@@ -17,7 +17,7 @@ export class ProfileCardComponent implements OnInit {
 
   constructor(private friendsService: FriendsService,
               private auth: AuthService,
-              private gs: GeneralService,
+              public gs: GeneralService,
               private router: Router) {
     this.auth.getCurrentUser().then((user: any) => this.disabled = user.friends.find(f => f === this.userId));
 
