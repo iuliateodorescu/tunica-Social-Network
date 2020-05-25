@@ -36,7 +36,6 @@ module.exports = {
   login: async (req, res) => {
     let reqUser = req.body
     let dbUser = await User.findOne({ email: req.body.email })
-    console.log(dbUser)
     if(!dbUser) {
         res.status(400).send("User does not exist")
         return
@@ -47,10 +46,7 @@ module.exports = {
         if (equal) {
           const user = dbUser
           const token = user.generateAuthToken()
-          res.header('x-auth-token', token).send({
-            _id: user._id,
-            email: user.email,
-          })
+          res.header('x-auth-token', token).json(token)
         } else {
           res.status(400).send('Wrong password')
         }
@@ -85,9 +81,7 @@ module.exports = {
   getFriends: async (req, res, next) => {
     try {
       const userId = req.params.id
-      console.log(userId)
       const user = await User.findById(userId)
-      console.log(user)
       let friends = user.friends
       res.json(friends)
     } catch (err) {
@@ -99,9 +93,8 @@ module.exports = {
   getFriendProfile: async (req, res) => {
     try {
       const friendId = req.body.id
-      console.log(friendId)
-      const profile = await Profile.findById(friendId)
-      res.json(profile)
+      const user = await User.findById(friendId).populate({path: 'profile',model: 'Profile'})
+      res.json(user.profile)
     } catch (err) {
       console.error(err)
       res.status(500).send(err)
@@ -114,7 +107,6 @@ module.exports = {
       path:'profile',
       model: 'Profile'
     })
-    console.log(users[0])
     res.send(users)
   }
  

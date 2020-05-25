@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {GeneralService} from './general.service';
+import {backendUrl} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,6 @@ export class GroupsService {
   public async addUserToGroup(groupId) {
     const user: any = await this.auth.getCurrentUser();
     const obj = {userId: user._id, groupId};
-    return this.http.post('/api/groups/addUserToGroup', obj, this.gs.getHttpOptions()).toPromise();
+    return this.http.post(`${backendUrl}/groups/addUserToGroup`, obj, this.gs.getHttpOptions()).toPromise();
   }
 }

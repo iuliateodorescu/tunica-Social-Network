@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material';
 import {GeneralService} from './general.service';
 import {Router} from '@angular/router';
+import {backendUrl} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
 
 
   register(user) {
-    this.http.post('/api/user/register', user)
+    this.http.post(`${backendUrl}/user/register`, user)
       .subscribe(res => {
           this.storeToken(res);
           this.isLoggedIn = true;
@@ -31,8 +32,9 @@ export class AuthService {
   }
 
   login(user) {
-    this.http.post('/api/user/login', user, {observe: 'response'})
+    this.http.post(`${backendUrl}/user/login`, user, {observe: `response`})
       .subscribe(res => {
+          console.log(res.headers.get('x-auth-token'));
           this.storeToken(res);
           this.isLoggedIn = true;
           this.refreshUserId();
@@ -45,15 +47,16 @@ export class AuthService {
   }
 
   storeToken(data) {
-    const token = data.headers.get('x-auth-token');
-    localStorage.setItem('token', token);
+    console.log(data)
+    const token = data.body;
+    localStorage.setItem(`token`, token);
     this.isLoggedIn = true;
-    this.router.navigate(['/']);
+    this.router.navigate([`/`]);
   }
 
   getCurrentUser() {
     return new Promise((resolve, reject) => {
-      this.http.get('/api/user', this.generalService.getHttpOptions())
+      this.http.get(`${backendUrl}/user`, this.generalService.getHttpOptions())
         .subscribe((res) => resolve(res), error => reject(error));
     });
   }
