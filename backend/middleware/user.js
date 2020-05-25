@@ -23,10 +23,7 @@ module.exports = {
       await user.save()
 
       const token = user.generateAuthToken()
-      res.header('x-auth-token', token).send({
-        _id: user._id,
-        email: user.email,
-      })
+      res.header('x-auth-token', token).json(token)
     } catch (err) {
       console.error(err)
       res.status(500).send(err)

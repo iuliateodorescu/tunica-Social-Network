@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit {
               private cdr: ChangeDetectorRef,
               public gs: GeneralService,
               public rest: RestService) {
-    this.updateProfileService.getProfile().then((p:any) => this.profile = p);
+    this.updateProfileService.getProfile().then((p:any) => this.profile = p || {});
 
     this.rest.getAll('university').subscribe(res => {
       this.universities = res;

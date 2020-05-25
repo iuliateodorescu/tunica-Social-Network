@@ -23,8 +23,10 @@ export class AuthService {
   register(user) {
     this.http.post(`${backendUrl}/user/register`, user)
       .subscribe(res => {
+          console.log(res);
           this.storeToken(res);
           this.isLoggedIn = true;
+          this.refreshUserId();
         },
         error => {
           this.generalService.resolveError(error);
@@ -34,7 +36,6 @@ export class AuthService {
   login(user) {
     this.http.post(`${backendUrl}/user/login`, user, {observe: `response`})
       .subscribe(res => {
-          console.log(res.headers.get('x-auth-token'));
           this.storeToken(res);
           this.isLoggedIn = true;
           this.refreshUserId();
@@ -47,8 +48,7 @@ export class AuthService {
   }
 
   storeToken(data) {
-    console.log(data)
-    const token = data.body;
+    const token = data.body ? data.body : data;
     localStorage.setItem(`token`, token);
     this.isLoggedIn = true;
     this.router.navigate([`/`]);
