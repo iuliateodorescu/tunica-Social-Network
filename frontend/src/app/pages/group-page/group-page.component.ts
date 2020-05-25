@@ -18,9 +18,8 @@ export class GroupPageComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.rest.getAll('groups/getPosts/' + this.groupId).subscribe(posts => {
-      this.posts = posts;
+      this.posts = posts.reverse();
       console.log(posts);
     });
   }
